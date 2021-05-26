@@ -42,10 +42,57 @@ Missing values were handled with imputation based on some rules that were presen
 
 ## **2.  Feature Engineering**
 
+**Create new features**
+
 New features were created:
 
 * rush_hour: Binary feature, it's equal to 1 if the train is traveling within a given rush hour. 0 otherwise.
 * difference: Difference between delay at arrival and delay at departure.
 * same_line: Binary feature, it's equal to 1 if the train arrives at the same line that departed. 0 otherwise.
+
+**Outlier detection**
+
+Outliers were detected and managed with a custom function to deal with them. The function calculates the Z score to detect if the given record is an outlier, then, the function calculates the mean of the records that were not marked as outliers, and finally, outliers are replaced with the calculated mean.
+
+```python
+def modify_outliers_mean(data,features):
+
+  '''
+  This function modifies outliers with mean.
+  First, the function detects outliers with Z-score, then calculates the mean of
+  the feature without outliers,and finally, replaces outliers with the calculated
+  mean.
+  Parameters:
+  -------------------
+  data: dataset to be analyzed
+  features: List of numerical features in the dataset
+  '''
+
+  to_del=[]
+  for i in features:
+
+    #Initialize null lists
+    ind_upper=[]
+    ind_lower=[]
+    ind=[]
+
+    #Calculate Z score
+    data['Z_score']=(data[i]-data[i].mean())/data[i].std()
+    print(data[(data['Z_score']>3) | (data['Z_score']<-3)].shape[0],' outliers detected for ',i)
+    to_del.append(data[(data['Z_score']>3) | (data['Z_score']<-3)].shape[0])
+    
+    #Identified outliers
+    ind=data[(data['Z_score']>3) | (data['Z_score']<-3)].index
+    
+    #Calculate mean to replace outlier
+
+    mean_to_replace=data[(data['Z_score']<3) & (data['Z_score']>-3)][i].mean()
+    
+    #Replacing outliers
+    data.loc[ind,i]=mean_to_replace
+
+  print('total outliers modified: ',sum(to_del))
+  data.drop(columns='Z_score',inplace=True)
+```
 
 
