@@ -95,4 +95,7 @@ def modify_outliers_mean(data,features):
   data.drop(columns='Z_score',inplace=True)
 ```
 
+## **3. Modeling and Evaluation**
+
+
 
