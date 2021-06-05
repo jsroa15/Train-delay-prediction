@@ -115,3 +115,9 @@ Before moving forward, it is important to explore how the models perform in the 
 | XGBoost Regressor       | 63                | 89         |
 | Random Forest Regressor | 60                | 85         |
 
+Hyperparameter tuning was performed with Randomized Grid Search, but performance didn't improve.
+
+## **Model Evaluation**
+
+It's time to evaluate the model in the test set and discover if the model works well to predict unseen data. The next figure shows how good is the model:
+
