@@ -121,3 +121,9 @@ Hyperparameter tuning was performed with Randomized Grid Search, but performance
 
 It's time to evaluate the model in the test set and discover if the model works well to predict unseen data. The next figure shows how good is the model:
 
+<img src= "https://github.com/jsroa15/Train-delay-prediction/blob/main/images/modeleval.jpg?raw=true" width="800"/>
+
+The RMSE in the test set is 195 Seconds, which represents an increase of 104.1 seconds, showing that the model's performance in the test-set is not the best, and the model maybe is facing overfitting or another issue with modeling or data.
+
+One of the previous steps before the modeling phase was to replace outliers in the train-set, but don't in the test set because is data that is supposed to be unknown. Exploring the shape of the continuous features in the test-set can give a better understanding:
+
