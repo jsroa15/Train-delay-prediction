@@ -127,3 +127,18 @@ The RMSE in the test set is 195 Seconds, which represents an increase of 104.1 s
 
 One of the previous steps before the modeling phase was to replace outliers in the train-set, but don't in the test set because is data that is supposed to be unknown. Exploring the shape of the continuous features in the test-set can give a better understanding:
 
+<img src= "https://github.com/jsroa15/Train-delay-prediction/blob/main/images/testeda.jpg" width="800"/>
+
+The figure shows that there are many outliers in the continuous features in the test-set, which can cause the model is not working well, because the model was trained without that behavior. At this point is impossible to decide if outliers are related whether to errors in data collection or normal conditions in the railway operation.
+
+Based on the previous statement it's possible to take advantage of another feature of XGBoost models: they are robust to outliers, for that reason it's feasible to model that behavior to determine if the performance can improve.
+
+Applying the same methodology, the model will be tested in train-set, cross-validation, and the test-set. Additionally, randomized grid search will be performed to tune the model. Results are shown as follows:
+
+| Model             | RMSE in Train-set | RMSE in CV | RMSE in Randomized  Grid Search | RMSE in Test-set |
+|-------------------|:-----------------:|:----------:|:-------------------------------:|:----------------:|
+| XGBoost Regressor |         3         |     16     |               18.9              |         7        |
+
+Model's performance improved significantly because of the outlier's inclusion. Although the RMSE in cross-validation increased by 13 seconds, it's not a big amount of time to conclude that the model suffers overfitting. The RMSE in randomized grid search was 18.9 seconds, showing no improvements with the initial model.
+
+Finally, the model performance in the test-set shows a RMSE of 7 seconds. This result shows that the model has a good performance in unseen data, which allows the model to generalize and predict new data with a small error
