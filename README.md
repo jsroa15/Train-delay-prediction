@@ -97,5 +97,16 @@ def modify_outliers_mean(data,features):
 
 ## **3. Modeling and Evaluation**
 
+Because of the number of categories within every categorical feature, the total amount of features was 239. A first approach to modeling was using Principal Component Analysis (PCA) to reduce dimensionality and gain computer time performance, however, model performance was not better. The next table shows the comparison between regular approach Vs PCA approach for differente models:
+
+From the above we can see that origial data perfoms better, computing time was smaller and performance had an good improvement.
+
+|        Model                      | Computing Time (PCA) | RMSE (PCA) | Computing Time (No PCA) | RMSE (No PCA) |
+|-----------------------------------|:--------------------:|:----------:|:-----------------------:|:-------------:|
+| Linear Regression (Baseline Model)| < 1 seg              | 279 Seg    | 2.7 Seg                 | 3.43E12 Seg   |
+| Random Forest                     | 39 Min               | 161 Seg    | 6 Min                   | 85 Seg        |
+| XGBoost                           | 2 Min                | 152 Seg    | 44 Seg                  | 89 Seg        |
+| Gradient Boosting                 | 13 Min               | 192 Seg    | 4 Min                   | 124 Seg       |
+
 
 
