@@ -108,5 +108,10 @@ From the above we can see that origial data perfoms better, computing time was s
 | XGBoost                           | 2 Min                | 152 Seg    | 44 Seg                  | 89 Seg        |
 | Gradient Boosting                 | 13 Min               | 192 Seg    | 4 Min                   | 124 Seg       |
 
+Before moving forward, it is important to explore how the models perform in the train set without cross-validation to determine if the models present overfitting or underfitting. As it's shown in the next table, the RMSE in train-set are relatively normal, neither not too low (overfitting) nor too high (underfitting). On the other hand, the RMSE with Cross Validation is on average 30 seconds higher, which shows that models are behaving well
 
+| Model                   | RMSE in train set | RMSE in CV |
+|-------------------------|-------------------|------------|
+| XGBoost Regressor       | 63                | 89         |
+| Random Forest Regressor | 60                | 85         |
 
